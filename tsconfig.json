@@ -1,0 +1,12 @@
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "types": [
+      "jest",
+      "cypress",
+      "@testing-library/cypress",
+      "@types/styled-components-react-native"
+    ]
+  }
+}
