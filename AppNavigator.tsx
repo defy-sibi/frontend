@@ -1,9 +1,9 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import Onboarding from './components/Onboarding';
-import Home from './components/Home';
 import {enableScreens} from 'react-native-screens';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import TabNavigator from './TabNavigator';
 
 enableScreens();
 
@@ -18,9 +18,24 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 const AppNavigator = () => (
   <SafeAreaProvider>
-    <Stack.Navigator initialRouteName="Onboarding">
-      <Stack.Screen name="Onboarding" component={Onboarding} />
-      <Stack.Screen name="Home" component={Home} />
+    <Stack.Navigator initialRouteName="Onboarding"
+      screenOptions={{
+        headerShown: false, // Hide the header
+      }}>
+      <Stack.Screen
+        name="Onboarding"
+        component={Onboarding}
+        options={{
+          headerShown: false, // Hide the header for the Onboarding screen
+        }}
+      />
+      <Stack.Screen
+        name="Home"
+        component={TabNavigator}
+        options={{
+          headerLeft: () => null, // Hide the back button
+        }}
+      />
       {/* Main is your new screen component */}
     </Stack.Navigator>
   </SafeAreaProvider>
