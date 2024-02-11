@@ -90,7 +90,7 @@ const Onboarding = () => {
       useNativeDriver: false,
     }).start(() => {
       if (isExistingUser) {
-        navigation.navigate('Home');
+        navigation.replace('Home');
       }
     });
   }, [logoSize, isExistingUser, navigation]);

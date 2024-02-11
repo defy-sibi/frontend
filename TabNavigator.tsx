@@ -17,7 +17,10 @@ const HomeStack = createStackNavigator();
 
 function HomeStackNavigator() {
   return (
-    <HomeStack.Navigator>
+    <HomeStack.Navigator
+      screenOptions={{
+        headerShown: false, // This hides the header globally for all screens in this navigator
+      }}>
       <HomeStack.Screen name="HomeScreen" component={Home} />
       <HomeStack.Screen name="SubscriptionForm" component={SubscriptionForm} />
     </HomeStack.Navigator>

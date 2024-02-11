@@ -11,6 +11,7 @@ import {
 import {Picker} from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {Subscription} from './Subscription';
+import {useNavigation} from '@react-navigation/native';
 //import * as Notifications from 'expo-notifications';
 
 interface Props {
@@ -23,6 +24,7 @@ const SubscriptionForm: React.FC<Props> = ({addSubscription}) => {
   const [cost, setCost] = useState('');
   const [lastPaymentDate, setLastPaymentDate] = useState(new Date());
   const [reminder, setReminder] = useState(false);
+  const navigation = useNavigation();
 
   const handleSubmit = async () => {
     if (reminder) {
@@ -117,6 +119,7 @@ const SubscriptionForm: React.FC<Props> = ({addSubscription}) => {
         <Switch value={reminder} onValueChange={setReminder} />
       </View>
       <Button title="Add Subscription" onPress={handleSubmit} />
+      <Button title="Cancel" onPress={() => navigation.goBack()} />
     </View>
   );
 };
