@@ -2,17 +2,17 @@ import React, {useState} from 'react';
 import {
   View,
   TextInput,
-  Button,
-  Text,
   Switch,
   Platform,
   Alert,
+  StyleSheet,
 } from 'react-native';
 import {Picker} from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {Subscription} from './Subscription';
 import {useNavigation} from '@react-navigation/native';
 //import * as Notifications from 'expo-notifications';
+import {Input, Button, Text} from '@rneui/base';
 
 interface Props {
   addSubscription: (subscription: Subscription) => void;
@@ -83,45 +83,67 @@ const SubscriptionForm: React.FC<Props> = ({addSubscription}) => {
   //     settings.ios?.status === Notifications.IosAuthorizationStatus.PROVISIONAL
   //   );
   // };
-
+  const today = new Date();
   return (
-    <View>
-      <TextInput
+    <View style={styles.container}>
+      <Input
         value={name}
         onChangeText={setName}
         placeholder="Subscription Name"
       />
+      <Input
+        value={cost}
+        onChangeText={setCost}
+        placeholder="Cost"
+        keyboardType="numeric"
+      />
+      <Text style={styles.label}>Billing Cycle</Text>
       <Picker
         selectedValue={type}
         onValueChange={itemValue => setType(itemValue)}>
         <Picker.Item label="Monthly" value="monthly" />
         <Picker.Item label="Annual" value="annual" />
       </Picker>
-      <TextInput
-        value={cost}
-        onChangeText={setCost}
-        placeholder="Cost"
-        keyboardType="numeric"
-      />
+      <Text style={styles.label}>Next Payment Due</Text>
       <DateTimePicker
         value={lastPaymentDate}
         mode="date"
         display="default"
         onChange={(event, date) => date && setLastPaymentDate(date)}
+        minimumDate={today}
       />
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}>
+      <View style={styles.switchContainer}>
         <Text>Set Reminder to Cancel Subscription</Text>
         <Switch value={reminder} onValueChange={setReminder} />
       </View>
+
       <Button title="Add Subscription" onPress={handleSubmit} />
-      <Button title="Cancel" onPress={() => navigation.goBack()} />
+
+      <Button title="Cancel" onPress={() => navigation.goBack()} type="clear" />
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+  },
+  picker: {
+    width: '100%',
+    marginVertical: 10,
+  },
+  switchContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 10,
+  },
+  label: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginVertical: 8,
+  },
+});
 
 export default SubscriptionForm;
