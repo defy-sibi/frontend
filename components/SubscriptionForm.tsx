@@ -99,33 +99,37 @@ const SubscriptionForm: React.FC<Props> = ({addSubscription}) => {
         placeholder="Cost"
         keyboardType="numeric"
       />
-      <Text style={styles.label}>Billing Cycle</Text>
-      <SelectDropdown
-        data={countries}
-        onSelect={(selectedItem, index) => {
-          console.log(selectedItem, index);
-        }}
-        buttonTextAfterSelection={(selectedItem, index) => {
-          // text represented after item is selected
-          // if data array is an array of objects then return selectedItem.property to render after item is selected
-          return selectedItem;
-        }}
-        rowTextForSelection={(item, index) => {
-          // text represented for each item in dropdown
-          // if data array is an array of objects then return item.property to represent item in dropdown
-          return item;
-        }}
-      />
-      <Text style={styles.label}>Next Payment Due</Text>
-      <DateTimePicker
-        value={lastPaymentDate}
-        mode="date"
-        display="default"
-        onChange={(event, date) => date && setLastPaymentDate(date)}
-        minimumDate={today}
-      />
+      <View style={styles.inlineContainer}>
+        <Text style={styles.label}>Next Payment Due</Text>
+        <DateTimePicker
+          value={lastPaymentDate}
+          mode="date"
+          display="default"
+          onChange={(event, date) => date && setLastPaymentDate(date)}
+          minimumDate={today}
+        />
+      </View>
+      <View style={styles.inlineContainer}>
+        <Text style={styles.label}>Billing Cycle</Text>
+        <SelectDropdown
+          data={countries}
+          onSelect={(selectedItem, index) => {
+            console.log(selectedItem, index);
+          }}
+          buttonTextAfterSelection={(selectedItem, index) => {
+            // text represented after item is selected
+            // if data array is an array of objects then return selectedItem.property to render after item is selected
+            return selectedItem;
+          }}
+          rowTextForSelection={(item, index) => {
+            // text represented for each item in dropdown
+            // if data array is an array of objects then return item.property to represent item in dropdown
+            return item;
+          }}
+        />
+      </View>
       <View style={styles.switchContainer}>
-        <Text>Set Reminder to Cancel Subscription</Text>
+        <Text style={styles.label}>Set Reminder to Cancel Subscription</Text>
         <Switch value={reminder} onValueChange={setReminder} />
       </View>
 
@@ -155,6 +159,21 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginVertical: 8,
+    flexShrink: 1,
+  },
+  inlineContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  dropdownButton: {
+    flexGrow: 1,
+  },
+  dropdownButtonText: {
+    textAlign: 'left',
+  },
+  dateTimePicker: {
+    flexGrow: 1,
   },
 });
 
