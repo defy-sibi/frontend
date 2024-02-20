@@ -13,6 +13,7 @@ import {Subscription} from './Subscription';
 import {useNavigation} from '@react-navigation/native';
 //import * as Notifications from 'expo-notifications';
 import {Input, Button, Text} from '@rneui/base';
+import SelectDropdown from 'react-native-select-dropdown';
 
 interface Props {
   addSubscription: (subscription: Subscription) => void;
@@ -84,6 +85,7 @@ const SubscriptionForm: React.FC<Props> = ({addSubscription}) => {
   //   );
   // };
   const today = new Date();
+  const countries = ['Monthly', 'Yearly'];
   return (
     <View style={styles.container}>
       <Input
@@ -98,12 +100,22 @@ const SubscriptionForm: React.FC<Props> = ({addSubscription}) => {
         keyboardType="numeric"
       />
       <Text style={styles.label}>Billing Cycle</Text>
-      <Picker
-        selectedValue={type}
-        onValueChange={itemValue => setType(itemValue)}>
-        <Picker.Item label="Monthly" value="monthly" />
-        <Picker.Item label="Annual" value="annual" />
-      </Picker>
+      <SelectDropdown
+        data={countries}
+        onSelect={(selectedItem, index) => {
+          console.log(selectedItem, index);
+        }}
+        buttonTextAfterSelection={(selectedItem, index) => {
+          // text represented after item is selected
+          // if data array is an array of objects then return selectedItem.property to render after item is selected
+          return selectedItem;
+        }}
+        rowTextForSelection={(item, index) => {
+          // text represented for each item in dropdown
+          // if data array is an array of objects then return item.property to represent item in dropdown
+          return item;
+        }}
+      />
       <Text style={styles.label}>Next Payment Due</Text>
       <DateTimePicker
         value={lastPaymentDate}
