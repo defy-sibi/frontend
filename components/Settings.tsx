@@ -14,7 +14,7 @@ const SettingsModal: React.FC<Props> = ({visible, onClose, onLogout}) => {
         <View style={styles.modalView}>
           <Text style={styles.modalText}>Settings</Text>
           <Button title="Logout" onPress={onLogout} />
-          <Button title="Close" onPress={onClose} />
+          <Button title="Close Settings" onPress={onClose} />
         </View>
       </View>
     </Modal>
