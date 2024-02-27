@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import {View, Text, Button, FlatList, StyleSheet} from 'react-native';
+import {View, Text, FlatList, StyleSheet} from 'react-native';
 import {Subscription} from './Subscription';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {Button} from '@rneui/base';
 //import {RouteProp} from '@react-navigation/native';
 
 type HomeStackParamList = {
@@ -48,9 +49,9 @@ const Home: React.FC<HomeScreenProps> = ({navigation}) => {
           keyExtractor={item => item.id}
         />
       ) : (
-        <Text style={styles.message}>No subscriptions yet.</Text>
+        <Text style={styles.message}>No subscriptions yet. Add your subscriptions here and manage them. </Text>
       )}
-      <Button title="Add Subscription" onPress={navigateToAddSubscription} />
+      <Button title="Get started!" onPress={navigateToAddSubscription} />
     </View>
   );
 };
@@ -68,6 +69,7 @@ const styles = StyleSheet.create({
   message: {
     fontSize: 18,
     marginBottom: 20,
+    textAlign: 'center',
   },
 });
 
