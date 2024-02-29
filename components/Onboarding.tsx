@@ -4,12 +4,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import styled from 'styled-components/native';
+import {OnboardFlow} from 'react-native-onboard';
 
 export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: #FFF;
+  background-color: #fff;
   /* Add other styles as needed */
 `;
 
@@ -147,18 +148,39 @@ const Onboarding = () => {
   );
 
   return (
-    <Container>
-      <Icon source={require('../images/logo.png')} />
-      <HeaderText>turf</HeaderText>
-      <TitleText>Subscription Management </TitleText>
-      <ListItem>
-        <ListText>Effortlessly Manage Your Subscriptions: One dashboard for all your subscription needs.</ListText>
-        <ListText>Discover Savings: Identify and cancel unused subscriptions with ease.</ListText>
-        <ListText>Stay Informed: Get timely alerts on subscription renewals and charges.</ListText>
-      </ListItem>
-      {renderUserForm()}
-    </Container>
+    <OnboardFlow
+      pages={[
+        {
+          title: 'Effortlessly Manage Your Subscriptions',
+          subtitle: 'One dashboard for all your subscription needs.',
+          imageUri: 'https://frigade.com/img/example1.png',
+        },
+        {
+          title: 'Discover Savings',
+          subtitle: 'Identify and cancel unused subscriptions with ease.',
+          imageUri: 'https://frigade.com/img/example2.png',
+        },
+        {
+          title: 'Stay Informed',
+          subtitle: 'Get timely alerts on subscription renewals and charges.',
+          imageUri: 'https://frigade.com/img/example1.png',
+        },
+      ]}
+      type={'fullscreen'}
+    />
   );
 };
 
 export default Onboarding;
+
+// <Container>
+//       <Icon source={require('../images/logo.png')} />
+//       <HeaderText>turf</HeaderText>
+//       <TitleText>Subscription Management </TitleText>
+//       <ListItem>
+//         <ListText>Effortlessly Manage Your Subscriptions: One dashboard for all your subscription needs.</ListText>
+//         <ListText>Discover Savings: Identify and cancel unused subscriptions with ease.</ListText>
+//         <ListText>Stay Informed: Get timely alerts on subscription renewals and charges.</ListText>
+//       </ListItem>
+//       {renderUserForm()}
+//     </Container>
